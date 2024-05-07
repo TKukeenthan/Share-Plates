@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "332089874826",
+    "project_id": "share-food-app-27867",
+    "storage_bucket": "share-food-app-27867.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:332089874826:android:810524ec39c9d5bd50d073",
+        "android_client_info": {
+          "package_name": "com.dreamtalkies.foodshare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAncZV3Jhz6Zzb3fjkqa-wZ_YBBsnxNKIY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
