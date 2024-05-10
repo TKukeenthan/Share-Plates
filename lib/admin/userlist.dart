@@ -27,12 +27,12 @@ class _UserListState extends State<UserList> {
       String image = doc['profileImg'];
       ImageProvider<Object>? backgroundImage = image != 'none'
           ? NetworkImage(image)
-          : AssetImage('images/avtar.png') as ImageProvider;
+          : const AssetImage('images/avtar.png') as ImageProvider;
       return InkWell(
         onTap: (() {
           db.collection("chats").doc(doc.id).set({
             'contact1': phone,
-            'contact2': 'TeamSharePlate',
+            'contact2': 'TeamWe4Us',
             'name': doc["name"],
             'profImg': doc['profileImg']
           });
@@ -45,7 +45,7 @@ class _UserListState extends State<UserList> {
           });
         }),
         child: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             border: Border(
               bottom: BorderSide(
                 color: Colors.black,
@@ -58,13 +58,13 @@ class _UserListState extends State<UserList> {
             leading: CircleAvatar(backgroundImage: backgroundImage, radius: 30),
             title: Text(
               doc["name"],
-              style: TextStyle(fontSize: 17, color: Colors.white),
+              style: const TextStyle(fontSize: 17, color: Colors.white),
             ),
             subtitle: Text(
               phone,
-              style: TextStyle(color: Colors.grey),
+              style: const TextStyle(color: Colors.grey),
             ),
-            trailing: Icon(
+            trailing: const Icon(
               CupertinoIcons.arrowshape_turn_up_right_circle,
               color: Colors.white,
             ),
@@ -82,7 +82,7 @@ class _UserListState extends State<UserList> {
             builder: (BuildContext context,
                 AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
               if (!snapshot.hasData) {
-                return Column(
+                return const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -105,7 +105,7 @@ class _UserListState extends State<UserList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('List of Users')),
+      appBar: AppBar(title: const Text('List of Users')),
       backgroundColor: Colors.black,
       body: chatlist(),
     );

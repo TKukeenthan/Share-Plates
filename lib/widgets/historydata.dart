@@ -47,7 +47,10 @@ class _FoodHistoryState extends State<FoodHistory> {
             style: TextStyle(color: Colors.white),
           );
         if (snapshot.hasData && !snapshot.data!.exists) {
-          return Center();
+          return Text(
+            "Something went wrong",
+            style: TextStyle(color: Colors.white),
+          );
         }
         if (snapshot.connectionState == ConnectionState.done) {
           DocumentSnapshot<Map<String, dynamic>> data = snapshot.data!;
@@ -71,7 +74,7 @@ class _FoodHistoryState extends State<FoodHistory> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(height: 50),
-                Center(child: CircularProgressIndicator())
+                 Center(child: Text('No Foods',style: TextStyle(color: Colors.white38),))
               ],
             ),
           if (foodData.length > 0)

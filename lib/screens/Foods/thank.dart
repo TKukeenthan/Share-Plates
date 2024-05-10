@@ -46,11 +46,11 @@ class ThankYouPage extends StatelessWidget {
                       style: TextStyle(color: Colors.white, fontSize: 15),
                     ),
                     SizedBox(height: 10),
-                    // QrImage(
-                    //     data: encodeData,
-                    //     version: QrVersions.auto,
-                    //     size: size.width * 0.4,
-                    //     backgroundColor: Colors.white),
+                    QrImageView(
+                        data: encodeData,
+                        version: QrVersions.auto,
+                        size: size.width * 0.4,
+                        backgroundColor: Colors.white),
                   ],
                 ),
               ),
@@ -76,7 +76,7 @@ class _BackButton extends StatelessWidget {
         icon: Icon(Icons.arrow_back, color: Colors.white, size: 30),
         enableFeedback: true,
         onPressed: () {
-          Navigator.popUntil(context, (route) => route.isFirst);
+          Navigator.pop(context);
         },
       ),
     );

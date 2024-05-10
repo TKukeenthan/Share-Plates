@@ -53,11 +53,10 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAncZV3Jhz6Zzb3fjkqa-wZ_YBBsnxNKIY',
-    appId: '1:332089874826:android:810524ec39c9d5bd50d073',
-    messagingSenderId: '332089874826',
-    projectId: 'share-food-app-27867',
-    storageBucket: 'share-food-app-27867.appspot.com',
+    apiKey: 'AIzaSyDBFVj2IINjumJ6d1xMKsivKwRrlSGcblo',
+    appId: '1:410004790939:android:29ebcc48821c6d85ef303e',
+    messagingSenderId: '410004790939',
+    projectId: 'share-food-flutter-app',
+    storageBucket: 'share-food-flutter-app.appspot.com',
   );
-
 }

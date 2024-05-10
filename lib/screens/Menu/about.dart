@@ -5,12 +5,12 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String _message = '''
-      SharePlate is a sanskrit word means “FOOD”. SharePlate can use to help hunger by earning some reward.In SharePlate user can upload there extra meal so that other hungery needy people can get it and that user will win some reward too.
+      We4Us  is a sanskrit word means “FOOD”. We4Us  can use to help hunger by earning some reward.In We4Us  user can upload there extra meal so that other hungery needy people can get it and that user will win some reward too.
  ''';
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text('About SharePlate'),
+        title: Text('About We4Us '),
         centerTitle: true,
       ),
       body: SafeArea(

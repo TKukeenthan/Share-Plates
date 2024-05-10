@@ -2,8 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../Auth/email_login.dart';
 import '../Auth/login.dart';
 import 'editprofile.dart';
 import 'gift.dart';
@@ -74,14 +76,14 @@ class _ProfilePageState extends State<ProfilePage> {
                   radius: size.width * 0.25,
                   backgroundImage: profImg == 'none'
                       ? AssetImage('images/logo.png') as ImageProvider
-                      : NetworkImage(profImg!),
+                      : NetworkImage(profImg??'https://classroomclipart.com/image/static7/preview2/hands-sharing-food-over-a-donation-box-66469.jpg'),
                 ),
                 ListTile(
-                  title: Text(name!),
+                  title: Text(name??''),
                   leading: Icon(Icons.person, size: 30),
                 ),
                 ListTile(
-                  title: Text(gender!),
+                  title: Text(gender??''),
                   leading: Icon(
                       gender == 'Male'
                           ? Icons.male_outlined
@@ -91,15 +93,15 @@ class _ProfilePageState extends State<ProfilePage> {
                       size: 30),
                 ),
                 ListTile(
-                  title: Text(type!),
+                  title: Text(type??''),
                   leading: Icon(Icons.task_alt, size: 30),
                 ),
                 ListTile(
-                  title: Text(phone!),
+                  title: Text(phone??''),
                   leading: Icon(Icons.call, size: 30),
                 ),
                 ListTile(
-                  title: Text(address!),
+                  title: Text(address??''),
                   leading: Icon(Icons.location_city, size: 30),
                 ),
                 if (type == 'Helper')
@@ -114,10 +116,10 @@ class _ProfilePageState extends State<ProfilePage> {
                       title: Text("$gift"),
                       leading: Icon(Icons.card_giftcard, size: 30),
                       trailing: Icon(Icons.chevron_right_sharp, size: 30),
-                      onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => GiftPage(gift: gift))),
+                      // onTap: () => Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => GiftPage(gift: gift))),
                     ),
                 ListTile(
                   title: Text(" Logout !!!"),
@@ -128,7 +130,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                LoginPage(prefs: widget.prefs)),
+                                LoginScreen(prefs: widget.prefs)),
                         (route) => false);
                   },
                 ),

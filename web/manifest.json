@@ -1,6 +1,6 @@
 {
-    "name": "foodshare",
-    "short_name": "foodshare",
+    "name": "shareplateapp",
+    "short_name": "shareplateapp",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

@@ -1,16 +1,20 @@
+
 import 'package:flutter/material.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:shareplateapp/screens/Auth/login.dart';
 import 'admin/home.dart';
 import 'firebase_options.dart';
+import 'screens/Auth/email_login.dart';
 import 'screens/Home/home.dart';
-import 'screens/Auth/login.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  // FirebaseAppCheck.instance.activate();
+final result=  await Firebase.initializeApp(
+   );
+    print(result.options);
+ // FirebaseAppCheck.instance.activate();
   SharedPreferences.getInstance().then(
     (prefs) {
       runApp(MyApp(prefs: prefs));
@@ -27,7 +31,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'SharePlate',
+      title: 'We4Us ',
       theme: ThemeData(primarySwatch: Colors.deepPurple),
       home: _checkUser(),
     );
@@ -36,10 +40,10 @@ class MyApp extends StatelessWidget {
   _checkUser() {
     if (prefs.getBool('is_verified') != null) {
       if (prefs.getBool('is_verified')!) {
-        if (prefs.getString('uid') == 'admin') return AdminPage(prefs: prefs);
-        return HomePage(prefs: prefs);
+        if (prefs.getString('uid') == 'Xk6fjxY7QmXBWXwqtZJ2sOsPqaa2') {return AdminPage(prefs: prefs);}else{return HomePage(prefs: prefs);}
+        
       }
     }
-    return LoginPage(prefs: prefs);
+    return LoginScreen(prefs: prefs);
   }
 }

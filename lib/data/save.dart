@@ -11,6 +11,7 @@ Future<void> saveUserData({
   required BuildContext context,
   required SharedPreferences prefs,
   required String uname,
+  required String email,
   required String ugender,
   required String uType,
   required String uaddress,
@@ -25,6 +26,7 @@ Future<void> saveUserData({
   final db = FirebaseFirestore.instance;
   await db.collection('users').doc(prefs.getString('uid')).set({
     'name': uname,
+    'email':email,
     'phone': phoneNo,
     'gender': ugender,
     'type': uType,
@@ -34,6 +36,7 @@ Future<void> saveUserData({
     'gift': 0
   });
   prefs.setString('name', uname);
+   prefs.setString('name', email);
   prefs.setString('gender', ugender);
   prefs.setString('type', uType);
   prefs.setString('address', uaddress);

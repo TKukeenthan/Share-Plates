@@ -1,4 +1,4 @@
-package com.dreamtalkies.foodshare
+package com.dreamtalkies.shareplateapp
 
 import io.flutter.embedding.android.FlutterActivity
 

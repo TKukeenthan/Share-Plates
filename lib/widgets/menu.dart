@@ -1,172 +1,148 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 
 import '../screens/Menu/about.dart';
 import '../screens/Menu/contact.dart';
-import '../screens/Menu/donate.dart';
 import '../screens/Menu/profile.dart';
 
-class CircularMenu extends StatefulWidget {
+class MenuButton extends StatelessWidget {
   final SharedPreferences prefs;
 
-  const CircularMenu({Key? key, required this.prefs}) : super(key: key);
+  MenuButton({Key? key, required this.prefs}) : super(key: key);
+  final GlobalKey<FabCircularMenuState> fabKey = GlobalKey();
 
-  @override
-  _CircularMenuState createState() => _CircularMenuState();
-}
+  Icon _chooseIcon(int i) {
+    Icon icon = i == 0
+        ? Icon(
+            CupertinoIcons.profile_circled,
+            size: 35,
+            color: Colors.white,
+          )
+        : i == 1
+            ? Icon(
+                CupertinoIcons.profile_circled,
+                size: 35,
+                color: Colors.white,
+              )
+            : i == 2
+                    ? Icon(CupertinoIcons.chat_bubble_text_fill,
+                        size: 35, color: Colors.white)
+                    : Icon(CupertinoIcons.info, size: 35, color: Colors.white);
+                //      i == 2
+                // ? Icon(
+                //     CupertinoIcons.money_dollar_circle,
+                //     size: 35,
+                //     color: Colors.white,
+                //   )
+                // :
 
-class _CircularMenuState extends State<CircularMenu>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _animation;
+    return icon;
+  }
 
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 500),
-    );
-    _animation = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    );
+  Color _chooseColor(int i) {
+    Color color = i == 0
+        ? Colors.red
+        : i == 1
+            ? Colors.blue
+            : i == 2
+                ? Colors.green
+                // : i == 3
+                //     ? Colors.pink
+                    : Colors.deepOrange;
+    return color;
+  }
+
+  choosePage(int i, BuildContext context) {
+    // ignore: unnecessary_statements
+    return i == 0
+        ? () {}
+        : i == 1
+            ? () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ProfilePage(prefs: prefs)),
+                );
+              }
+            : i == 2
+                // ? () {
+                //     Navigator.push(
+                //       context,
+                //       MaterialPageRoute(builder: (context) => DonatePage()),
+                //     );
+                //   }
+                // : 
+               // i == 3
+                    ? () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ContactPage(prefs: prefs)),
+                        );
+                      }
+                    : () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => AboutPage()),
+                        );
+                      };
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Stack(
-      children: [
-        Positioned(
-          bottom: 0,
-          right: 0,
-          child: AnimatedBuilder(
-            animation: _animation,
-            builder: (context, child) {
-              return Transform.scale(
-                scale: _animation.value,
-                child: FloatingActionButton(
-                  onPressed: () {
-                    if (_controller.isDismissed) {
-                      _controller.forward();
-                    } else {
-                      _controller.reverse();
-                    }
-                  },
-                  child: Icon(Icons.apps_rounded),
-                  backgroundColor: Colors.deepPurple,
-                ),
-              );
-            },
-          ),
+    return Builder(
+      builder: (context) => FabCircularMenu(
+        key: fabKey,
+        alignment: Alignment.bottomRight,
+        ringColor: Colors.deepPurple.withAlpha(1000),
+        ringDiameter: size.width,
+        ringWidth: size.width * 0.2,
+        fabSize: size.width * 0.2,
+        fabElevation: 8.0,
+        fabIconBorder: CircleBorder(),
+        fabColor: Colors.deepPurple,
+        fabOpenIcon: Icon(
+          Icons.apps_rounded,
+          color: Colors.white,
+          size: size.width * 0.08,
         ),
-        Positioned(
-          bottom: size.width * 0.2,
-          right: size.width * 0.2,
-          child: _CircularButton(
-            color: Colors.red,
-            icon: Icon(
-              CupertinoIcons.profile_circled,
-              size: 35,
-              color: Colors.white,
-            ),
-            onClick: () {},
-          ),
+        fabCloseIcon: Icon(
+          Icons.cancel_outlined,
+          color: Colors.white,
+          size: size.width * 0.08,
         ),
-        Positioned(
-          bottom: size.width * 0.2,
-          right: size.width * 0.5,
-          child: _CircularButton(
-            color: Colors.blue,
-            icon: Icon(
-              CupertinoIcons.profile_circled,
-              size: 35,
-              color: Colors.white,
-            ),
-            onClick: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ProfilePage(prefs: widget.prefs)),
-              );
-            },
-          ),
-        ),
-        Positioned(
-          bottom: size.width * 0.5,
-          right: size.width * 0.2,
-          child: _CircularButton(
-            color: Colors.green,
-            icon: Icon(
-              CupertinoIcons.money_dollar_circle,
-              size: 35,
-              color: Colors.white,
-            ),
-            onClick: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => DonatePage()),
-              );
-            },
-          ),
-        ),
-        Positioned(
-          bottom: size.width * 0.5,
-          right: size.width * 0.5,
-          child: _CircularButton(
-            color: Colors.pink,
-            icon: Icon(
-              CupertinoIcons.chat_bubble_text_fill,
-              size: 35,
-              color: Colors.white,
-            ),
-            onClick: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ContactPage(prefs: widget.prefs)),
-              );
-            },
-          ),
-        ),
-        Positioned(
-          bottom: size.width * 0.35,
-          right: size.width * 0.35,
-          child: _CircularButton(
-            color: Colors.deepOrange,
-            icon: Icon(
-              CupertinoIcons.info,
-              size: 35,
-              color: Colors.white,
-            ),
-            onClick: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => AboutPage()),
-              );
-            },
-          ),
-        ),
-      ],
+        fabMargin: const EdgeInsets.all(16.0),
+        animationDuration: const Duration(milliseconds: 800),
+        animationCurve: Curves.easeInOutCirc,
+        children: <Widget>[
+          for (int i = 1; i < 4; i++)
+            _CirCularButton(
+              // width: size.width * 0.2,
+              // height: size.height * 0.1,
+              color: _chooseColor(i),
+              icon: _chooseIcon(i),
+              onClick: choosePage(i, context),
+            )
+        ],
+      ),
     );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 }
 
-class _CircularButton extends StatelessWidget {
+class _CirCularButton extends StatelessWidget {
+  // final double width;
+  // final double height;
   final Color color;
   final Icon icon;
   final VoidCallback onClick;
-
-  const _CircularButton({
+  const _CirCularButton({
     Key? key,
+    // required this.width,
+    // required this.height,
     required this.color,
     required this.icon,
     required this.onClick,
@@ -179,10 +155,13 @@ class _CircularButton extends StatelessWidget {
         color: color,
         shape: BoxShape.circle,
       ),
-      child: IconButton(
-        icon: icon,
-        color: Colors.white,
-        onPressed: onClick,
+      child: Padding(
+        padding: const EdgeInsets.all(6.0),
+        child: IconButton(
+          icon: icon,
+          enableFeedback: true,
+          onPressed: onClick,
+        ),
       ),
     );
   }

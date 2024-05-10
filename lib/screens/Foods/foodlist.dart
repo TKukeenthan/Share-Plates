@@ -108,7 +108,9 @@ class _FoodListState extends State<FoodList> {
           .forEach((element) {
         data = element.docs;
         setState(() {});
-      }).onError((error, stackTrace) => {});
+      }).onError((error, stackTrace) {
+        print(error);
+      });
     }
   }
 
@@ -261,7 +263,7 @@ class _FoodListState extends State<FoodList> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(height: 50),
-                Center(child: CircularProgressIndicator())
+                Center(child: Text('No Foods',style: TextStyle(color: Colors.white38),))
               ],
             ),
           if (data.length > 0)

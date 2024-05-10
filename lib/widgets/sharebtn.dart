@@ -27,7 +27,7 @@ class ShareButtons extends StatelessWidget {
             Text(
               prefs.getString('type') == 'Helper'
                   ? 'Share Your Meal'
-                  : prefs.getString('type') == 'Organisation'
+                  : prefs.getString('type') == 'Needy'
                       ? 'Available Meals'
                       : 'Type of Meals',
               style: TextStyle(

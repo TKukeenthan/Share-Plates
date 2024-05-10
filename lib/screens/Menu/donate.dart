@@ -3,7 +3,7 @@ import 'package:url_launcher/link.dart';
 
 class DonatePage extends StatelessWidget {
   final String message =
-      '''Thank you for your generous gift to SharePlate. We are thrilled to have your support. Through your donation we have been able to accomplish our goal and continue working towards feeding the needy people. You truly make the difference for us, and we are extremely grateful!''';
+      '''Thank you for your generous gift to We4Us . We are thrilled to have your support. Through your donation we have been able to accomplish our goal and continue working towards feeding the needy people. You truly make the difference for us, and we are extremely grateful!''';
 
   @override
   Widget build(BuildContext context) {

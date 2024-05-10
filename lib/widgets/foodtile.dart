@@ -35,7 +35,7 @@ class _FoodTileState extends State<FoodTile> {
                   val: widget.val,
                   history: widget.history)));
     } else {
-      await repFoodData(val: widget.val, prefs: widget.prefs);
+     
       showDialog<String>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
@@ -50,6 +50,7 @@ class _FoodTileState extends State<FoodTile> {
           ],
         ),
       );
+       await repFoodData(val: widget.val, prefs: widget.prefs);
     }
   }
 

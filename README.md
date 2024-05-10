@@ -1,4 +1,4 @@
-# foodshare
+# shareplateapp
 
 A new Flutter project.
 

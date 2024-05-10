@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+
 import 'package:shared_preferences/shared_preferences.dart';
+import '../screens/Auth/email_login.dart';
 import '../screens/Auth/login.dart';
 import 'chatlist.dart';
 import 'userlist.dart';
@@ -24,7 +26,7 @@ class _AdminPageState extends State<AdminPage> {
           children: [
             Image.asset('images/logo.png', width: 30),
             SizedBox(width: 10),
-            Text('SharePlate'),
+            Text('We4Us'),
           ],
         ),
         leading: Icon(CupertinoIcons.checkmark_shield_fill),
@@ -35,7 +37,7 @@ class _AdminPageState extends State<AdminPage> {
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => LoginPage(prefs: widget.prefs),
+                    builder: (context) => LoginScreen(prefs: widget.prefs),
                   ),
                   (route) => false);
             },
