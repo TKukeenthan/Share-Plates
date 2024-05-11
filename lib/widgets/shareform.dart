@@ -31,6 +31,8 @@ class _ShareFormState extends State<ShareForm> {
   DateTime? _fooddatetime;
   File? image;
 
+TextEditingController foodNameController=TextEditingController();
+TextEditingController addressController=TextEditingController();
   Future<void> showLoading(BuildContext context) async {
     Size size = MediaQuery.of(context).size;
     return showDialog(
@@ -39,7 +41,7 @@ class _ShareFormState extends State<ShareForm> {
           return new Container(
             padding: EdgeInsets.symmetric(
                 vertical: size.height * 0.42, horizontal: size.width * 0.4),
-            child: Container(child: CircularProgressIndicator()),
+            child: Container(child: const CircularProgressIndicator()),
           );
         });
   }
@@ -66,22 +68,22 @@ class _ShareFormState extends State<ShareForm> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Choose source of image'),
-            content: Container(
+            title: const Text('Choose source of image'),
+            content: SizedBox(
               width: 60,
               height: 120,
               child: Column(children: [
                 ListTile(
-                  title: Text('Camera'),
-                  leading: Icon(CupertinoIcons.camera_fill),
+                  title: const Text('Camera'),
+                  leading: const Icon(CupertinoIcons.camera_fill),
                   onTap: () {
                     pickImage(ImageSource.camera);
                     Navigator.pop(context);
                   },
                 ),
                 ListTile(
-                  title: Text('Gallery'),
-                  leading: Icon(CupertinoIcons.folder_solid),
+                  title: const Text('Gallery'),
+                  leading: const Icon(CupertinoIcons.folder_solid),
                   onTap: () {
                     pickImage(ImageSource.gallery);
                     Navigator.pop(context);
@@ -97,14 +99,14 @@ class _ShareFormState extends State<ShareForm> {
     Size size = MediaQuery.of(context).size;
     ImageProvider<Object>? backgroundImage = image != null
         ? FileImage(image!)
-        : AssetImage('images/upload.png') as ImageProvider;
+        : const AssetImage('images/upload.png') as ImageProvider;
     return Column(
       children: [
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Center(
           child: Stack(
             children: [
-              Container(
+              SizedBox(
                 width: size.width * 0.5,
                 height: size.height * 0.25,
                 child: CircleAvatar(
@@ -136,6 +138,7 @@ class _ShareFormState extends State<ShareForm> {
         padding:
             EdgeInsets.only(left: size.width * 0.05, right: size.width * 0.05),
         child: TextFormField(
+          controller: foodNameController,
           validator: (value) {
             if (value == null || value.isEmpty) {
               return 'Please Enter Item Name';
@@ -144,7 +147,7 @@ class _ShareFormState extends State<ShareForm> {
             }
             return null;
           },
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
               labelText: 'Enter Name of Item',
               icon: Icon(
                 Icons.food_bank_rounded,
@@ -163,6 +166,7 @@ class _ShareFormState extends State<ShareForm> {
         padding:
             EdgeInsets.only(left: size.width * 0.05, right: size.width * 0.05),
         child: TextFormField(
+          controller: addressController,
           validator: (value) {
             if (value == null || value.isEmpty) {
               return 'Please Enter Place of Item';
@@ -171,7 +175,7 @@ class _ShareFormState extends State<ShareForm> {
             }
             return null;
           },
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
               labelText: 'Enter Item Place',
               icon: Icon(
                 Icons.place_outlined,
@@ -183,13 +187,13 @@ class _ShareFormState extends State<ShareForm> {
 
   Widget _foodDateTime(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Container(
+    return SizedBox(
       width: 900,
       child: Padding(
         padding:
             EdgeInsets.only(left: size.width * 0.05, right: size.width * 0.05),
         child: DateTimeField(
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
               labelText: 'Enter Duration of Item is with You',
               icon: Icon(Icons.timelapse_outlined)),
           validator: (value) {
@@ -242,7 +246,7 @@ class _ShareFormState extends State<ShareForm> {
                   color: Colors.grey[700],
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Column(
                 children: [
                   Row(children: [
@@ -256,10 +260,10 @@ class _ShareFormState extends State<ShareForm> {
                             _foodtype = val as int;
                           });
                         }),
-                    SizedBox(width: 10.0),
-                    Text('Solid / Firm')
+                    const SizedBox(width: 10.0),
+                    const Text('Solid / Firm')
                   ]),
-                  SizedBox(width: 30),
+                  const SizedBox(width: 30),
                   Row(children: [
                     Icon(CupertinoIcons.arrow_right_square,
                         size: 25, color: Colors.grey[500]),
@@ -271,8 +275,8 @@ class _ShareFormState extends State<ShareForm> {
                             _foodtype = val as int;
                           });
                         }),
-                    SizedBox(width: 10.0),
-                    Text('Liquid / Fluid'),
+                    const SizedBox(width: 10.0),
+                    const Text('Liquid / Fluid'),
                   ]),
                 ],
               ),
@@ -298,12 +302,12 @@ class _ShareFormState extends State<ShareForm> {
                 'Choose The Quantity of Item ',
                 style: TextStyle(fontSize: 17, color: Colors.grey[700]),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Row(
                 children: [
                   Icon(CupertinoIcons.arrow_right_square,
                       size: 27, color: Colors.grey[500]),
-                  SizedBox(width: 5),
+                  const SizedBox(width: 5),
                   for (int i = 1; i <= 6; i++)
                     Column(
                       children: [
@@ -338,10 +342,10 @@ class _ShareFormState extends State<ShareForm> {
             await saveFoodData(
                     context: context,
                     prefs: widget.prefs,
-                    fname: _foodname,
+                    fname: foodNameController.text.trim(),
                     ftype: widget.ftype,
                     fstate: _foodtype!,
-                    fplace: _foodplace,
+                    fplace: addressController.text.trim(),
                     ftime: _fooddatetime,
                     fnum: _foodlevel,
                     fimage: image)
@@ -350,7 +354,7 @@ class _ShareFormState extends State<ShareForm> {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ThankYouPage(
+                      builder: (context) => const ThankYouPage(
                           encodeData: 'Thanks For Sharing Your Meal')));
             });
           
@@ -372,17 +376,17 @@ class _ShareFormState extends State<ShareForm> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             _foodImage(context),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             _foodName(context),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             _foodPlace(context),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             _foodDateTime(context),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             _foodTye(context),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             _foodLevel(context),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             _shareButton(context),
           ],
         ));
