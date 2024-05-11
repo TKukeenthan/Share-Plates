@@ -26,10 +26,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -59,4 +56,14 @@ class DefaultFirebaseOptions {
     projectId: 'share-food-flutter-app',
     storageBucket: 'share-food-flutter-app.appspot.com',
   );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyARz95NYKriW3jV8rbqpWKoKvEVNuHgjQY',
+    appId: '1:410004790939:ios:d14223fd68d60cdaef303e',
+    messagingSenderId: '410004790939',
+    projectId: 'share-food-flutter-app',
+    storageBucket: 'share-food-flutter-app.appspot.com',
+    iosBundleId: 'com.dreamtalkies.shareplateapp',
+  );
+
 }

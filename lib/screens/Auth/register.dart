@@ -45,7 +45,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
 //function for getting image
   Future<void> _getImage() async {
-    imageXFile = await _picker.pickImage(source: ImageSource.gallery);
+    imageXFile = (await _picker.pickImage(source: ImageSource.gallery));
 
     setState(() {
       imageXFile;
@@ -55,13 +55,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 //Form Validation
   Future<void> signUpFormValidation() async {
     //checking if user selected image
-    if (imageXFile == null) {
-      setState(
-        () {
-          // imageXFile == "images/bg.png";
-        },
-      );
-    } else if (_gender == '') {
+
+    if (_gender == '') {
       showDialog(
         context: context,
         builder: (c) {
@@ -97,22 +92,37 @@ class _RegisterScreenState extends State<RegisterScreen> {
               );
             },
           );
-
-          String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-          fStorage.Reference reference = fStorage.FirebaseStorage.instance
-              .ref()
-              .child("users")
-              .child(fileName);
-          fStorage.UploadTask uploadTask =
-              reference.putFile(File(imageXFile!.path));
-          fStorage.TaskSnapshot taskSnapshot =
-              await uploadTask.whenComplete(() {});
-          await taskSnapshot.ref.getDownloadURL().then((url) {
-            userImageUrl = url;
-
-            // save info to firestore
+          if (imageXFile == null) {
+            setState(
+              () {
+                if (_gender == 'Male') {
+                  userImageUrl =
+                      'https://cdn-icons-png.flaticon.com/128/4128/4128176.png';
+                } else {
+                  userImageUrl =
+                      'https://cdn-icons-png.flaticon.com/128/6997/6997662.png';
+                }
+              },
+            );
             AuthenticateSellerAndSignUp();
-          });
+          } else {
+            String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+
+            fStorage.Reference reference = fStorage.FirebaseStorage.instance
+                .ref()
+                .child("users")
+                .child(fileName);
+            fStorage.UploadTask uploadTask =
+                reference.putFile(File(imageXFile!.path));
+            fStorage.TaskSnapshot taskSnapshot =
+                await uploadTask.whenComplete(() {});
+            await taskSnapshot.ref.getDownloadURL().then((url) {
+              userImageUrl = url;
+
+              // save info to firestore
+              AuthenticateSellerAndSignUp();
+            });
+          }
         }
         //if there is empty place show this message
         else {

@@ -15,9 +15,6 @@ import '../../widgets/header_widget.dart';
 import '../../widgets/loading_dialog.dart';
 import 'register.dart';
 
-
-
-
 class LoginScreen extends StatefulWidget {
   final SharedPreferences prefs;
   const LoginScreen({Key? key, required this.prefs}) : super(key: key);
@@ -71,7 +68,6 @@ class _LoginScreenState extends State<LoginScreen> {
       (auth) {
         currentUser = auth.user!;
         print(auth.user!);
-       
       },
     ).catchError((error) {
       Navigator.pop(context);
@@ -85,8 +81,8 @@ class _LoginScreenState extends State<LoginScreen> {
       );
     });
     if (currentUser != null) {
-       widget.prefs.setString('uid', currentUser!.uid);
-       widget.prefs.setBool('is_verified', true);
+      widget.prefs.setString('uid', currentUser!.uid);
+      widget.prefs.setBool('is_verified', true);
       readDataAndSetDataLocally(currentUser!);
     }
   }
@@ -102,24 +98,25 @@ class _LoginScreenState extends State<LoginScreen> {
         //check if the user is user
         if (snapshot.exists) {
           setState(() {
-      widget.  prefs.setString('name', snapshot.data()!['name']);
-     widget.    prefs.setString('email', snapshot.data()!['email']);
-     widget.    prefs.setString('gender', snapshot.data()!['gender']);
-     widget.    prefs.setString('type', snapshot.data()!['type']);
-     widget.    prefs.setString('address', snapshot.data()!['address']);
-     widget.     prefs.setString('profImg', snapshot.data()!['profileImg']);
-     widget.    prefs.setString('phone', snapshot.data()!['phone']);
-     widget.  prefs.setInt('gift', snapshot.data()!['gift']);
-    widget.   prefs.setBool('is_verified', true);
-      });
+            widget.prefs.setString('name', snapshot.data()!['name']);
+            widget.prefs.setString('email', snapshot.data()!['email']);
+            widget.prefs.setString('gender', snapshot.data()!['gender']);
+            widget.prefs.setString('type', snapshot.data()!['type']);
+            widget.prefs.setString('address', snapshot.data()!['address']);
+            widget.prefs.setString('profImg', snapshot.data()!['profileImg']);
+            widget.prefs.setString('phone', snapshot.data()!['phone']);
+            widget.prefs.setInt('gift', snapshot.data()!['gift']);
+            widget.prefs.setBool('is_verified', true);
+          });
 
-            Navigator.pop(context);
-            if (widget.prefs.getBool('is_verified') != null) {
-      if (widget.prefs.getBool('is_verified')!) {
-        if (widget.prefs.getString('uid') == 'Xk6fjxY7QmXBWXwqtZJ2sOsPqaa2') {return AdminPage(prefs:widget. prefs);}else{return HomePage(prefs:widget. prefs);}
-        
-      }
-    }
+          Navigator.pop(context);
+         if (widget.prefs.getString('uid') == 'Xk6fjxY7QmXBWXwqtZJ2sOsPqaa2') {
+              print("Succes ${snapshot.data()!['uid']}");
+               Navigator.push(context, MaterialPageRoute(builder: (_)=>AdminPage(prefs: widget.prefs)));
+            } else {
+               Navigator.push(context, MaterialPageRoute(builder: (_)=>HomePage(prefs: widget.prefs)));
+              
+            }
         }
         //if user is not a user
         else {
@@ -129,7 +126,9 @@ class _LoginScreenState extends State<LoginScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (c) =>  LoginScreen(prefs: widget.prefs,),
+              builder: (c) => LoginScreen(
+                prefs: widget.prefs,
+              ),
             ),
           );
           showDialog(
@@ -144,7 +143,6 @@ class _LoginScreenState extends State<LoginScreen> {
       },
     );
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -280,8 +278,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                               RegisterScreen(prefs: widget.prefs,)));
+                                          builder: (context) => RegisterScreen(
+                                                prefs: widget.prefs,
+                                              )));
                                 },
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
