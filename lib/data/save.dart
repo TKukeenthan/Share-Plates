@@ -52,8 +52,11 @@ Future<void> saveUserData({
 }
 
 Future<String> _saveImage(File _image, dynamic prefs) async {
-  String imageURL = await _uploadFile(_image, prefs);
+ 
+String imageURL = await _uploadFile(_image, prefs);
   return imageURL;
+  
+  
 }
 
 Future<String> _uploadFile(File? _image, SharedPreferences prefs) async {
@@ -81,6 +84,8 @@ Future<void> saveFoodData({
   String foodImg = '';
   if (fimage != null) {
     foodImg = await _saveImage(fimage, prefs);
+  }else{
+    foodImg='https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg';
   }
   final db = FirebaseFirestore.instance;
   DocumentReference<Map<String, dynamic>> docRefs = db.collection(ftype).doc();

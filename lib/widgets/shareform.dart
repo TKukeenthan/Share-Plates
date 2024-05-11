@@ -333,14 +333,7 @@ class _ShareFormState extends State<ShareForm> {
     return Center(
       child: ElevatedButton(
         onPressed: () async {
-          if (image == null) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Please Upload the Food Image'),
-                duration: Duration(seconds: 10),
-              ),
-            );
-          } else if (_formKey.currentState!.validate()) {
+          
             showLoading(context);
             await saveFoodData(
                     context: context,
@@ -360,7 +353,7 @@ class _ShareFormState extends State<ShareForm> {
                       builder: (context) => ThankYouPage(
                           encodeData: 'Thanks For Sharing Your Meal')));
             });
-          }
+          
         },
         child: const Text(
           'Share Food / Item',
